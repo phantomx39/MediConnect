@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - City General Hospital</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-staff-snake"></i>
+                </div>
+                <h2>City General Hospital</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#" data-target="dashboard-section">
+                            <i class="fa-solid fa-house"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="doctors-section">
+                            <i class="fa-solid fa-user-doctor"></i>
+                            <span>Available Doctors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="appointments-section">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <span>My Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="prescriptions-section">
+                            <i class="fa-solid fa-file-prescription"></i>
+                            <span>Prescriptions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="book-appointment-section">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Book Appointment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="profile-section">
+                            <i class="fa-regular fa-user"></i>
+                            <span>Patient Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="billing-section">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            <span>Billing / Payments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="help-section">
+                            <i class="fa-regular fa-circle-question"></i>
+                            <span>Help / Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Log Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="top-bar">
+                <button id="sidebarToggle" class="sidebar-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="top-bar-right">
+                    <!-- Notifications Dropdown -->
+                    <div class="dropdown-container">
+                        <div class="notifications dropdown-trigger" data-dropdown="notificationsMenu">
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="badge">3</span>
+                        </div>
+                        <div class="dropdown-menu" id="notificationsMenu">
+                            <div class="dropdown-header">
+                                <h4>Notifications</h4>
+                                <span class="badge">3 New</span>
+                            </div>
+                            <div class="dropdown-body">
+                                <div class="dropdown-item unread">
+                                    <div class="item-icon bg-blue"><i class="fa-regular fa-calendar-check"></i></div>
+                                    <div class="item-content">
+                                        <p>Appointment confirmed with Dr. Smith</p>
+                                        <span>Just now</span>
+                                    </div>
+                                </div>
+                                <div class="dropdown-item unread">
+                                    <div class="item-icon bg-green"><i class="fa-solid fa-pills"></i></div>
+                                    <div class="item-content">
+                                        <p>Prescription refill approved</p>
+                                        <span>2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="dropdown-item unread">
+                                    <div class="item-icon bg-orange"><i class="fa-solid fa-flask"></i></div>
+                                    <div class="item-content">
+                                        <p>Lab results are ready to view</p>
+                                        <span>Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-footer">
+                                <a href="#">Mark all as read</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Profile Dropdown -->
+                    <div class="dropdown-container">
+                        <div class="user-profile dropdown-trigger" data-dropdown="profileMenu">
+                            <img src="https://ui-avatars.com/api/?name=Aayush&background=0D8ABC&color=fff"
+                                alt="User Avatar" class="avatar">
+                            <span class="user-name">Aayush</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-menu" id="profileMenu">
+                            <div class="dropdown-item"
+                                onclick="document.querySelector('.sidebar-nav a[data-target=\'profile-section\']').click()">
+                                <i class="fa-regular fa-user"></i> My Profile
+                            </div>
+                            <div class="dropdown-item"
+                                onclick="document.querySelector('.sidebar-nav a[data-target=\'billing-section\']').click()">
+                                <i class="fa-solid fa-cog"></i> Settings
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item text-danger" id="headerLogoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="welcome-section">
+                        <h1>Welcome back, Aayush!</h1>
+                        <p>Here's what's happening with your health appointments today.</p>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="summary-cards">
+                        <div class="card summary-card">
+                            <div class="card-icon blue">
+                                <i class="fa-regular fa-calendar-check"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Total Appointments</h3>
+                                <p class="count">12</p>
+                                <span class="trend up"><i class="fa-solid fa-arrow-up"></i> 2 new this month</span>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card-icon green">
+                                <i class="fa-solid fa-stethoscope"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Upcoming Appointment</h3>
+                                <p class="highlight">Dr. Sarah Smith</p>
+                                <span class="sub-text">Tomorrow at 10:00 AM</span>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card-icon purple">
+                                <i class="fa-solid fa-pills"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Active Prescriptions</h3>
+                                <p class="count">2</p>
+                                <span class="sub-text">Refill due in 5 days</span>
+                            </div>
+                        </div>
+                        <div class="card summary-card">
+                            <div class="card-icon orange">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Available Doctors</h3>
+                                <p class="count">8</p>
+                                <span class="sub-text">Specialists available today</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointments and Prescriptions Grid -->
+                    <div class="content-grid">
+                        <!-- Upcoming Appointments Table -->
+                        <div class="card appointments-section">
+                            <div class="card-header">
+                                <h3>Upcoming Appointments</h3>
+                                <a href="#" class="view-all">View All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="appointments-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial No.</th>
+                                            <th>Doctor</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Department</th>
+                                            <th>Status</th>
+                                            <th>Booking Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="upcomingApptsList">
+                                        <!-- Populated via Javascript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Recent Prescriptions -->
+                        <div class="card prescriptions-section">
+                            <div class="card-header">
+                                <h3>Recent Prescriptions</h3>
+                                <a href="#" class="view-all" onclick="document.querySelector('.sidebar-nav a[data-target=\'prescriptions-section\']').click(); return false;">View All</a>
+                            </div>
+                            <div class="prescriptions-list" id="recentPrescList">
+                                <!-- Populated via Javascript -->
+                            </div>
+                        </div>
+                </section>
+
+                <!-- Doctors Section -->
+                <section id="doctors-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Available Doctors</h1>
+                        <p>Browse and connect with our medical specialists.</p>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="doctor-search-container">
+                        <i class="fa-solid fa-search search-icon"></i>
+                        <input type="text" id="doctorSearchInput" class="form-control" placeholder="Search by name, specialty, or area of excellence...">
+                    </div>
+
+                    <!-- Popular Doctors -->
+                    <div class="section-header mt-4 mb-3">
+                        <h2>Popular Doctors</h2>
+                        <p class="text-muted" style="font-size: 14px;">Highly recommended specialists based on patient reviews.</p>
+                    </div>
+                    
+                    <div class="doctors-grid popular-doctors-grid">
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Binod+Singh&background=random&size=120"
+                                    alt="Dr. Binod Singh">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Binod Singh</h3>
+                                <p class="specialty">Cardiologist</p>
+                                <p class="excellence" style="color: var(--primary-color); font-size: 13px; margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-award"></i> Excellence: Heart Surgery</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(5.0)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=random&size=120"
+                                    alt="Dr. Priya Sharma">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Priya Sharma</h3>
+                                <p class="specialty">Neurologist</p>
+                                <p class="excellence" style="color: var(--primary-color); font-size: 13px; margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-award"></i> Excellence: Brain Tumors</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=random&size=120"
+                                    alt="Dr. Rajesh Kumar">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Rajesh Kumar</h3>
+                                <p class="specialty">Orthopedics</p>
+                                <p class="excellence" style="color: var(--primary-color); font-size: 13px; margin-bottom: 10px; font-weight: 500;"><i class="fa-solid fa-award"></i> Excellence: Joint Replacement</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(4.8)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-header mt-5 mb-3">
+                        <h2>All Doctors</h2>
+                    </div>
+
+                    <div class="doctors-grid all-doctors-grid">
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Leha+Roy&background=random&size=120"
+                                    alt="Dr. Leha Roy">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Leha Roy</h3>
+                                <p class="specialty">Cardiologist</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(5.0)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Smith&background=random&size=120"
+                                    alt="Dr. Sarah Smith">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Sarah Smith</h3>
+                                <p class="specialty">Cardiologist</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                    <span>(4.8)</span>
+                                </div>
+                                <p class="availability"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=James+Wilson&background=random&size=120"
+                                    alt="Dr. James Wilson">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. James Wilson</h3>
+                                <p class="specialty">Dermatologist</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <span>(4.0)</span>
+                                </div>
+                                <p class="availability text-warning" style="color: var(--warning-color);"><i class="fa-regular fa-clock"></i> Available
+                                    Tomorrow</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=random&size=120"
+                                    alt="Dr. Emily Davis">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Emily Davis</h3>
+                                <p class="specialty">General Medicine</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(5.0)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Michael+Chen&background=random&size=120"
+                                    alt="Dr. Michael Chen">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Michael Chen</h3>
+                                <p class="specialty">Neurology</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                    <span>(4.6)</span>
+                                </div>
+                                <p class="availability text-warning" style="color: var(--warning-color);"><i class="fa-regular fa-clock"></i> Available on
+                                    Thursday</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Ananya+Gupta&background=random&size=120"
+                                    alt="Dr. Ananya Gupta">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Ananya Gupta</h3>
+                                <p class="specialty">Pediatrics</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Vikram+Singh&background=random&size=120"
+                                    alt="Dr. Vikram Singh">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Vikram Singh</h3>
+                                <p class="specialty">Psychiatry</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <span>(4.2)</span>
+                                </div>
+                                <p class="availability text-warning" style="color: var(--warning-color);"><i class="fa-regular fa-clock"></i> Available Tomorrow</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Zoe+Patel&background=random&size=120"
+                                    alt="Dr. Zoe Patel">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Zoe Patel</h3>
+                                <p class="specialty">Oncology</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                    <span>(4.7)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=William+Chang&background=random&size=120"
+                                    alt="Dr. William Chang">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. William Chang</h3>
+                                <p class="specialty">Gastroenterology</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>(4.9)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Sophia+Martinez&background=random&size=120"
+                                    alt="Dr. Sophia Martinez">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Sophia Martinez</h3>
+                                <p class="specialty">Orthopedics</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                    <span>(4.8)</span>
+                                </div>
+                                <p class="availability text-warning" style="color: var(--warning-color);"><i class="fa-regular fa-clock"></i> Available Tomorrow</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-card">
+                            <div class="doctor-img">
+                                <img src="https://ui-avatars.com/api/?name=Benjamin+Lee&background=random&size=120"
+                                    alt="Dr. Benjamin Lee">
+                            </div>
+                            <div class="doctor-info-ext">
+                                <h3>Dr. Benjamin Lee</h3>
+                                <p class="specialty">Radiology</p>
+                                <div class="rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <span>(4.4)</span>
+                                </div>
+                                <p class="availability text-success" style="color: var(--success-color);"><i class="fa-regular fa-clock"></i> Available Today</p>
+                                <button class="btn btn-primary btn-sm">Book Visit</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Appointments Section -->
+                <section id="appointments-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>My Appointments</h1>
+                        <p>View and manage your upcoming and past medical visits.</p>
+                    </div>
+
+                    <div class="page-tabs">
+                        <button class="tab-btn active">Upcoming</button>
+                        <button class="tab-btn">Past</button>
+                        <button class="tab-btn">Cancelled</button>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="table-responsive">
+                            <table class="appointments-table">
+                                <thead>
+                                    <tr>
+                                        <th>Serial No.</th>
+                                        <th>Doctor</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Booking Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allApptsList">
+                                    <!-- Populated via Javascript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Prescriptions Section -->
+                <section id="prescriptions-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Prescriptions</h1>
+                        <p>Track your active and historical medication records.</p>
+                    </div>
+
+                    <div class="prescriptions-grid" id="fullPrescList">
+                        <!-- Populated via Javascript -->
+                    </div>
+                </section>
+
+                <!-- Book Appointment Section -->
+                <section id="book-appointment-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Book Appointment</h1>
+                        <p>Schedule a new visit with your preferred doctor.</p>
+                    </div>
+
+                    <div class="card book-form-card">
+                        <form class="book-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <select class="form-control">
+                                        <option>Select Department</option>
+                                        <option>Cardiology</option>
+                                        <option>Dermatology</option>
+                                        <option>General Medicine</option>
+                                        <option>Neurology</option>
+                                        <option>Oncology</option>
+                                        <option>Gastroenterology</option>
+                                        <option>Orthopedics</option>
+                                        <option>Radiology</option>
+                                        <option>Psychiatry</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doctor</label>
+                                    <select class="form-control">
+                                        <option>Select Doctor</option>
+                                        <option>Dr. Leha Roy</option>
+                                        <option>Dr. Sarah Smith</option>
+                                        <option>Dr. James Wilson</option>
+                                        <option>Dr. Emily Davis</option>
+                                        <option>Dr. Zoe Patel</option>
+                                        <option>Dr. William Chang</option>
+                                        <option>Dr. Sophia Martinez</option>
+                                        <option>Dr. Benjamin Lee</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Time</label>
+                                    <select class="form-control">
+                                        <option>Select Time Slot</option>
+                                        <option>09:00 AM</option>
+                                        <option>10:00 AM</option>
+                                        <option>11:30 AM</option>
+                                        <option>02:00 PM</option>
+                                        <option>04:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reason for Visit</label>
+                                <textarea class="form-control" id="bookReason" rows="4"
+                                    placeholder="Briefly describe your symptoms or reason for visit..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2"
+                                style="width: auto; padding: 12px 30px;">Confirm Booking</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Patient Profile</h1>
+                        <p>Manage your personal and medical information.</p>
+                    </div>
+
+                    <div class="profile-layout">
+                        <div class="card profile-sidebar">
+                            <div class="profile-pic-area">
+                                <img src="https://ui-avatars.com/api/?name=Aayush&background=0D8ABC&color=fff&size=150"
+                                    alt="Aayush">
+                                <button class="btn btn-outline btn-sm mt-3">Change Photo</button>
+                            </div>
+                            <ul class="profile-nav">
+                                <li class="active">Personal Info</li>
+                                <li>Medical History</li>
+                                <li>Insurance Details</li>
+                                <li>Emergency Contacts</li>
+                            </ul>
+                        </div>
+                        <div class="card profile-details">
+                            <h3>Personal Information</h3>
+                            <form class="profile-form mt-4">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" value="Aayush">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" value="Doe">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" class="form-control" value="aayush@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" class="form-control" value="+1 (555) 123-4567">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" value="123 Health Ave, Medical District">
+                                </div>
+                                <button type="button" class="btn btn-primary mt-3">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Billing Section -->
+                <section id="billing-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Billing / Payments</h1>
+                        <p>View invoices and securely make online payments.</p>
+                    </div>
+
+                    <div class="billing-summary">
+                        <div class="card billing-card text-center"
+                            style="max-width: 400px; margin: 0 auto; padding: 40px;">
+                            <h3 style="color: var(--text-muted); font-weight: 500;">Current Balance</h3>
+                            <div class="balance-amount"
+                                style="font-size: 40px; font-weight: 700; color: var(--dark-text); margin: 10px 0;">
+                                $150.00</div>
+                            <p class="due-date" style="color: var(--danger-color); font-size: 14px;">Due by Feb 28, 2026
+                            </p>
+                            <button class="btn btn-primary mt-4" style="width: 100%;">Pay Now</button>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header border-bottom padding-bottom">
+                            <h3>Recent Invoices</h3>
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="appointments-table">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice ID</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="billingList">
+                                    <!-- Populated via Javascript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Help Section -->
+                <section id="help-section" class="content-section" style="display: none;">
+                    <div class="welcome-section">
+                        <h1>Help / Support</h1>
+                        <p>Get assistance with the portal and find answers to common questions.</p>
+                    </div>
+
+                    <div class="help-layout">
+                        <div class="card faq-section">
+                            <h3 style="margin-bottom: 20px;">Frequently Asked Questions</h3>
+                            <div class="faq-item">
+                                <h4 class="faq-header">How do I reschedule an appointment? <i
+                                        class="fa-solid fa-chevron-down"></i></h4>
+                                <div class="faq-body">
+                                    <p>You can reschedule by going to "My Appointments", finding your upcoming visit,
+                                        and
+                                        clicking the "Reschedule" button. Note that reschedules must happen at least 24
+                                        hours prior.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-header">How do I request a prescription refill? <i
+                                        class="fa-solid fa-chevron-down"></i></h4>
+                                <div class="faq-body">
+                                    <p>Navigate to the "Prescriptions" tab. If your prescription has remaining refills,
+                                        the
+                                        "Request Refill" button will be active to submit your request directly to your
+                                        pharmacy.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-header">Can I pay my bill over the phone? <i
+                                        class="fa-solid fa-chevron-down"></i></h4>
+                                <div class="faq-body">
+                                    <p>Yes, you can call our billing department at 1-800-555-BILL between 8 AM and 5 PM
+                                        EST.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card contact-section">
+                            <h3 style="margin-bottom: 20px;">Contact Us</h3>
+                            <form class="contact-form">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select class="form-control">
+                                        <option>General Support</option>
+                                        <option>Billing Issue</option>
+                                        <option>Technical Problem</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea class="form-control" rows="5"
+                                        placeholder="How can we help you today?"></textarea>
+                                </div>
+                                <button type="button" class="btn btn-primary mt-2 w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Global Toast Container -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <!-- Contact Doctor Modal -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Contact Doctor</h3>
+                <button class="close-modal" id="closeContactModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 20px; color: var(--text-muted);">How would you like to reach <strong id="contactDoctorName"></strong>?</p>
+                
+                <div class="contact-options">
+                    <button class="contact-btn" id="btnChatContact">
+                        <div class="contact-icon"><i class="fa-solid fa-message"></i></div>
+                        <div class="contact-text">
+                            <h4>Secure Chat</h4>
+                            <p>Free for lifetime. Send text messages securely.</p>
+                        </div>
+                    </button>
+                    
+                    <button class="contact-btn" id="btnVoiceContact">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="contact-text">
+                            <h4>Voice Call</h4>
+                            <p id="voiceCallDesc">Standard voice consultation.</p>
+                        </div>
+                    </button>
+                    
+                    <button class="contact-btn" id="btnVideoContact">
+                        <div class="contact-icon"><i class="fa-solid fa-video"></i></div>
+                        <div class="contact-text">
+                            <h4>Video Call</h4>
+                            <p id="videoCallDesc">Face-to-face virtual consultation.</p>
+                        </div>
+                    </button>
+                </div>
+                
+                <div id="contactPricingAlert" style="display: none; margin-top: 15px; padding: 12px; background: rgba(220,53,69,0.1); border-radius: var(--border-radius); border-left: 4px solid var(--danger-color);">
+                    <p style="margin:0; font-size: 13px; color: var(--danger-color);"><strong>Note:</strong> You have used your 3 free voice/video calls. Further combined voice/video calls will cost $5 per session.</p>
+                </div>
+                
+                <div class="modal-actions mt-4 text-center">
+                    <button type="button" class="btn btn-outline" id="cancelContactBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

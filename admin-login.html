@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control Panel Login - City General Hospital</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .brand-header h1 {
+            color: #d11a2a; /* Admin specific red */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-card" style="border-top: 4px solid #d11a2a;">
+            <div class="brand-header">
+                <div class="logo-icon" style="background-color: #ffe6e6; color: #d11a2a;">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h1>Admin Control Panel</h1>
+                <p>Authorized Personnel Only</p>
+            </div>
+
+            <form id="adminLoginForm" class="login-form">
+                <div class="input-group">
+                    <label for="adminId">Admin ID</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-id-badge input-icon"></i>
+                        <input type="text" id="adminId" placeholder="Enter Admin ID" autocomplete="username">
+                    </div>
+                    <span class="error-message" id="idError"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="password" placeholder="Enter your password"
+                            autocomplete="current-password">
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <button type="submit" class="login-btn mt-4" style="background-color: #d11a2a; border-color: #d11a2a; box-shadow: 0 4px 10px rgba(209, 26, 42, 0.3);">
+                    <span>Admin Login</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+                    <p><strong>Test Admin:</strong> admin / 123</p>
+                </div>
+            </form>
+
+            <div class="footer-links" style="margin-top: 20px;">
+                <p><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Patient Portal</a></p>
+            </div>
+        </div>
+
+        <div class="background-decor">
+            <div class="circle circle-1" style="background: linear-gradient(135deg, #ff9999, #ff3333);"></div>
+            <div class="circle circle-2" style="background: linear-gradient(135deg, #ffcccc, #ff6666);"></div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+    <script src="admin-login.js"></script>
+</body>
+
+</html>
